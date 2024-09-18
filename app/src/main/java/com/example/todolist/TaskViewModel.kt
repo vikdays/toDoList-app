@@ -30,7 +30,7 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
         val task = list!!.find { it.id == id }
         task?.let {
             it.name = name
-            it.isDone = isDone
+            it.isDone = isDone  // Обновление состояния задачи
             taskItems.postValue(list)
         }
     }
@@ -68,6 +68,7 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
             println("External storage is not mounted or not available.")
         }
     }
+
 
     fun loadTaskItemsFromJsonFile(fileName: String) {
         val gson = Gson()

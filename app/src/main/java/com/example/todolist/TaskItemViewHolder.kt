@@ -15,11 +15,16 @@ class TaskItemViewHolder(
 
     fun bindTaskItem(taskItem: TaskItem) {
         binding.name.text = taskItem.name
+        binding.checkBox.isChecked = taskItem.isDone
         binding.taskCellContainer.setOnClickListener{
             clickListener.editTaskItem(taskItem)
         }
         binding.deleteButton.setOnClickListener {
             clickListener.deleteTaskItem(taskItem)
+        }
+        binding.checkBox.setOnCheckedChangeListener { _, isChecked ->
+            taskItem.isDone = isChecked
+            clickListener.updateTaskItem(taskItem)  // Обновление в модели
         }
 
     }

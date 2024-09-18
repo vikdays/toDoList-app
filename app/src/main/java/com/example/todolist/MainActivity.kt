@@ -63,6 +63,10 @@ class MainActivity : AppCompatActivity(), TaskItemClickListener {
         taskViewModel.removeTaskItem(taskItem)
     }
 
+    override fun updateTaskItem(taskItem: TaskItem) {
+        taskViewModel.updateTaskItem(taskItem.id, taskItem.name, taskItem.isDone)
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
         return true
