@@ -44,7 +44,11 @@ class NewTaskSheet(var taskItem: TaskItem?) : BottomSheetDialogFragment() {
     }
 
     private fun saveAction() {
-        val name = binding.name.text.toString()
+        val name = binding.name.text.toString().trim()
+        if (name.isEmpty()) {
+            binding.name.error = "Task name cannot be empty"
+            return
+        }
         if (taskItem == null) {
             val newTask = TaskItem(name)
             taskViewModel.addTaskItem(newTask)

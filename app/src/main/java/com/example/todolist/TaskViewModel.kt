@@ -41,15 +41,6 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
         taskItems.postValue(list)
     }
 
-    fun toggleTaskCompletion(id: UUID) {
-        val list = taskItems.value
-        val task = list!!.find { it.id == id }
-        task?.let {
-            it.isDone = !it.isDone
-            taskItems.postValue(list)
-        }
-    }
-
     fun saveTaskItemsToJsonFile(fileName: String) {
         val list = taskItems.value
         if (list.isNullOrEmpty()) {
