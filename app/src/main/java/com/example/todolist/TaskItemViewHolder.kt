@@ -1,32 +1,32 @@
 package com.example.todolist
 
-import android.content.Context
 import android.graphics.Paint
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todolist.databinding.TaskItemCellBinding
-import java.time.format.DateTimeFormatter
-import java.util.PrimitiveIterator
 
 class TaskItemViewHolder(
     private val binding: TaskItemCellBinding,
     private val clickListener: TaskItemClickListener
-): RecyclerView.ViewHolder(binding.root)
-{
+) : RecyclerView.ViewHolder(binding.root) {
 
     fun bindTaskItem(taskItem: TaskItem) {
-        binding.name.text = taskItem.name
+        binding.name.text = taskItem.description
         binding.checkBox.isChecked = taskItem.isDone
-        binding.taskCellContainer.setOnClickListener{
+        binding.checkBox.setOnCheckedChangeListener { _, isChecked ->
+            taskItem.isDone = isChecked
+            clickListener.updateTaskItem(taskItem)
+        }
+        binding.taskCellContainer.setOnClickListener {
             clickListener.editTaskItem(taskItem)
         }
         binding.deleteButton.setOnClickListener {
             clickListener.deleteTaskItem(taskItem)
         }
-        binding.checkBox.setOnCheckedChangeListener { _, isChecked ->
-            taskItem.isDone = isChecked
-            clickListener.updateTaskItem(taskItem)  // Обновление в модели
+
+        if (taskItem.isDone) {
+            binding.name.paintFlags = binding.name.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+        } else {
+            binding.name.paintFlags = binding.name.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
         }
-
     }
-
 }

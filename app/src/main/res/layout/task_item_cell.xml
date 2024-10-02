@@ -46,6 +46,6 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/garbage_trash_svgrepo_com"/>
     </LinearLayout>
-    
+
 
 </androidx.cardview.widget.CardView>
